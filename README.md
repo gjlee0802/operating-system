@@ -14,4 +14,4 @@
 
 ## 부가 자료
 * [대학원 면접 대비: Scheduling](./interview_questions/6-cpu-scheduling.md)
-* [대학원 면접 대비: Virtual Memory](./interview_questions/9-virtual-memory)
+* [대학원 면접 대비: Virtual Memory](./interview_questions/9-virtual-memory.md)
