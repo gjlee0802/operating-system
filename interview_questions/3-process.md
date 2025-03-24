@@ -63,3 +63,13 @@
 "Copy-on-Write (CoW)" 방식(**쓰기 시점에 복사**)으로 성능을 최적화함.  
 * 읽기만 할 땐 부모와 자식이 같은 메모리 참조
 * **쓰기 시점에만 실제 메모리 분리**
+
+### 2. A context switching may occur between threads or between processes. In the following table, indicate whether each action occurs or not upon switching between threads and switching between processes, respectively. Mark O to indicate an action occurs; mark X to indicate an action does not occur. (P 22-23 Second)
+
+| Action                | Switching threads | Switching process | 설명 |
+|-----------------------|-------------------|-------------------|------|
+| **Switching registers**    | O | O | CPU의 일반 레지스터는 어떤 실행 단위든 저장/복원해야 하므로 O |
+| **Switching PC (Program Counter)** | O | O | 다음에 실행할 명령어 주소도 항상 전환 시 저장/복원해야 하므로 O |
+| **Switching Stack Pointer** | O | O | 각 쓰레드/프로세스마다 스택이 따로 존재하므로 당연히 O |
+| **Switching Page Table** | X | O | 쓰레드는 프로세스의 주소 공간을 공유하므로 X, 프로세스는 분리된 주소 공간을 가지므로 O |
+| **Saving/Restoring PCB** | X | O | PCB(Process Control Block)는 프로세스 단위 정보이므로, **쓰레드 전환에서는 필요 없음** |
