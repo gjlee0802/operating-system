@@ -9,11 +9,11 @@
 ~~~
 ~~~
 
-## 3. Provide the necessary condition(s) for a deadlock to occur. You must properly explain all condition(s) to get the full credit. (P 24-25 First)
+### 3. Provide the necessary condition(s) for a deadlock to occur. You must properly explain all condition(s) to get the full credit. (P 24-25 First)
 ~~~
 ~~~
 
-## 4. List the four necessary conditons for a deadlock to occur and explain each conditon. 중요!! (P 23-24 Second)
+### 4. List the four necessary conditons for a deadlock to occur and explain each conditon. 중요!! (P 23-24 Second)
 ~~~
 ~~~
 
