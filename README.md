@@ -14,5 +14,8 @@
 
 ## 부가 자료
 * [대학원 면접 대비: Process](./interview_questions/3-process.md)
+* [대학원 면접 대비: Process Synchronization](./interview_questions/5-process-synchronization.md)
 * [대학원 면접 대비: Scheduling](./interview_questions/6-cpu-scheduling.md)
+* [대학원 면접 대비: Deadlocks](./interview_questions/7-deadlocks.md)
+* [대학원 면접 대비: Memory Management Strategies](./interview_questions/8-memory-management-strategies.md)
 * [대학원 면접 대비: Virtual Memory](./interview_questions/9-virtual-memory.md)
