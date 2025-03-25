@@ -3,18 +3,74 @@
 ## 개념 질문
 ### 1. Deadlock은 무엇인가? (P 24-25 First)
 ~~~
+여러 프로세스가 서로가 가진 자원을 기다리며 무한히 대기하는 상태
+→ 어떤 프로세스도 작업을 더 이상 진행할 수 없는 막힌 상황
 ~~~
 
-### 2. List up three approaches to handle deadlocks. (P 24-25 Second)
+
+### 2. Deadlock가 발생하기 위한 4가지 필요 조건들을 제시하시오. 각 조건을 정확히 설명하시오. 중요!! (P 23-24 Second, P 24-25 First)
+이 **4가지 조건** 중 하나라도 깨뜨리면 교착 상태는 예방할 수 있음
+
+1. `상호 배제 조건 (Mutual Exclusion)`
 ~~~
+어떤 자원은 한 번에 하나의 프로세스만 사용할 수 있어야 한다.
 ~~~
 
-### 3. Provide the necessary condition(s) for a deadlock to occur. You must properly explain all condition(s) to get the full credit. (P 24-25 First)
+2. `점유와 대기 조건 (Hold and Wait)`
 ~~~
+프로세스가 자신이 점유하고 있는 자원을 놓지 않은 채,
+다른 자원을 추가로 요청하며 대기하는 상태여야 한다
 ~~~
 
-### 4. List the four necessary conditons for a deadlock to occur and explain each conditon. 중요!! (P 23-24 Second)
+3. `비선점 조건 (No Preemption)`
 ~~~
+이미 할당된 자원은 강제로 빼앗을 수 없고,
+자원을 가진 프로세스가 자발적으로 반납해야만 한다
 ~~~
+
+4. `순환 대기 조건 (Circular Wait)`
+~~~
+서로의 자원을 기다리며 원형(Circular)으로 대기하는 상황이 있어야 한다
+~~~
+
+#### 요약
+| 조건           | 설명 |
+|----------------|------|
+| **상호 배제** (Mutual Exclusion) | 자원은 동시에 하나의 프로세스만 사용할 수 있어야 함 |
+| **점유와 대기** (Hold and Wait) | 자원을 보유한 프로세스가 다른 자원을 추가로 요청하며 기다림 |
+| **비선점** (No Preemption) | 이미 할당된 자원은 강제로 회수할 수 없음. 자발적으로 반환해야 함 |
+| **순환 대기** (Circular Wait) | 프로세스들이 원형으로 서로의 자원을 기다리는 상태 |
+
+
+### 3. Deadlock을 처리하기 위한 세 가지 접근 방법을 나열하시오. (P 24-25 Second)
+1. Deadlock **예방**(`Prevention`)
+    ~~~
+    Deadlock 발생 조건 4가지 중 하나 이상을 사전에 없애는 방법
+    ~~~
+
+    * 예방 방법:
+        * `상호 배제 조건(Mutual Exclusion)` 예방: 일부 자원을 공유 가능하게 하는 방법 (현실적으로 어려움)
+            * 현실에서는 대부분 자원이 상호 배체가 필요하여 제거가 어려움
+        * `점유와 대기 조건(Hold and Wait)` 예방: **자원을 요청하기 전에 모두 할당되도록 요구하기**
+            * 자원을 가지고 있는 채로 다른 자원을 기다리는 상황 자체가 없기 때문에, 점유와 대기(Hold and Wait) 조건이 깨짐
+        * `비선점 조건(No Preemption)` 예방: 자원이 부족하면 현재 점유 중인 자원을 강제로 뺏어서 회수 (현실적으로 어려움)
+            * CPU처럼 선점 가능한 자원은 회수 가능하지만, 대부분 자원은 선점이 어렵거나 위험
+        * `순환 대기 조건(Circular Wait)` 예방: **자원에 고정된 순서 부여하기**
+
+2. Deadlock **회피**(`Avoidance`)
+    ~~~
+    시스템이 안전한 상태인지 판단하고,
+    Deadlock이 발생할 수 있는 자원 요청은 거절
+    ~~~
+
+3. Deadlock **탐지 및 복구**(`Detection and Recovery`)
+    ~~~
+    Deadlock이 발생하는 것을 허용하고,
+    주기적으로 이를 탐지한 후 복구 조치를 취함
+    ~~~
+    * 복구 조치:
+        * Deadlock 상태에 있는 프로세스 중 하나 종료
+        * 자원을 선점하여 강제로 회복
+
 
 ## 심층 문제

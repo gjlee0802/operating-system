@@ -2,13 +2,32 @@
 ## 개념 질문
 ### 1. Demand paging이란 무엇인가? (P 23-24 First)
 ~~~
+프로그램이 실제로 필요로 할 때(요구할 때)에만 해당 페이지를 메모리에 불러오는 방식
+즉, 프로그램의 전체 페이지를 한꺼번에 메모리에 올리지 않고, 실제로 접근하는 페이지만 로딩하는 것
 ~~~
 
-### 2. How can a multi-level page table mitigate the storage overhead? (P 23-24 First)
+### 2. Multi-level Page Table은 어떻게 저장 공간 낭비를 줄이는가? (P 23-24 First)
+메모리 효율 관점:
 ~~~
+단일 페이지 테이블(Single-level Page Table)의 문제점:
+프로세스가 쓰지 않는 페이지까지도 페이지 테이블에 항목을 둬야 해서 RAM 낭비가 큼
+
+Multi-level 페이지 테이블의 효과:
+필요한 페이지 테이블만 만들어서 RAM 사용량을 줄임
 ~~~
-### 3. What is the key drawback of using a multi-level page table from the perspective of address translation performance? (23-24 First)
+
+스토리지(디스크) 효율 관점:
 ~~~
+실제로 참조된 주소 영역만 테이블이 생성되기 때문에,
+페이지 테이블이 디스크에 저장된다고 해도 불필요한 부분까지 디스크 공간을 사용하지 않음
+~~~
+### 3. Multi-level Page Table을 사용할 때 Address Translation 성능 관점에서의 주요 단점(key drawback)은 무엇인가? (23-24 First)
+~~~
+주소 변환 시, 여러 단계의 테이블을 순차적으로 접근해야 하므로 변환 속도가 느려짐
+Page Table 접근으로 인한 성능 저하를 완화하기 위해 TLB 캐시를 사용함
+
+예를 들어, 2 단계 페이지 테이블이라면:
+가상 주소 → 1단계 테이블 → 2단계 테이블 → 실제 페이지 프레임
 ~~~
 
 ## 심층 문제
