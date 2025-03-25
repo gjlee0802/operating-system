@@ -19,7 +19,11 @@
 쓰레드는 Code, Data, Heap 영역을 공유하며, Stack은 쓰레드마다 개별적으로 따로 존재
 ~~~
 
-## 심층 질문
+### 2. Provide at least one advantage of using threads over processes. (P 24-25 First)
+
+### 3. Provide at least one advantage of using processes over threads. (P 24-25 First)
+
+## 심층 문제
 
 ### 1. 프로세스가 fork() 를 사용하여 새로운 프로세스를 생성할 때, 다음 중 부모 프로세스와 자식 프로세스 사이에 공유되는 상태는 무엇인가? 단, CoW는 적용되지 않는다고 가정한다. (P 22-23 First)
 ~~~
