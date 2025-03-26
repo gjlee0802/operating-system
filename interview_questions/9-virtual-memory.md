@@ -2,7 +2,13 @@
 
 ## 개념 질문
 
-### 1. 요구 페이징(demand-paging)에서 페이지 폴트(page fault)는 어떤 상황에서 발생하는가? 페이지 폴트가 발생했을 때 운영체제가 수행하는 동작들을 설명하시오. (P 24-25 Second)
+### 1. Demand paging이란 무엇인가? (P 23-24 First)
+~~~
+프로그램이 실제로 필요로 할 때(요구할 때)에만 해당 페이지를 메모리에 불러오는 방식
+즉, 프로그램의 전체 페이지를 한꺼번에 메모리에 올리지 않고, 실제로 접근하는 페이지만 로딩하는 것
+~~~
+
+### 2. 요구 페이징(demand-paging)에서 페이지 폴트(page fault)는 어떤 상황에서 발생하는가? 페이지 폴트가 발생했을 때 운영체제가 수행하는 동작들을 설명하시오. (P 24-25 Second)
 ✅ Page Fault 발생 조건:  
 ~~~
 프로세스가 접근하려는 페이지가 현재 메모리에 없는 경우 (즉, 디스크에 존재)
@@ -18,7 +24,7 @@
 6. 중단된 명령어 재실행
 ~~~
 
-### 2. TLB(Translation Lookaside Buffer)란 무엇인가? TLB의 역할과 동작 방식에 대해 명확히 설명하시오. (P 24-25 First)
+### 3. TLB(Translation Lookaside Buffer)란 무엇인가? TLB의 역할과 동작 방식에 대해 명확히 설명하시오. (P 24-25 First)
 ✅ TLB란 무엇인가?  
 ~~~
 가상 주소 => 물리 주소 변환을 빠르게 하기 위한 Cache 메모리
@@ -35,7 +41,7 @@ TLB hit가 발생하면 빠른 변환이 이루어짐
 TLB miss가 발생하면 Page Table 접근하여 TLB에 항목 추가를 고려
 ~~~
 
-### 3. TLB 슛다운(TLB shootdown)이란 무엇인가? 그것이 왜 (또는 언제) 필요한지 설명하시오. (P 24-25 First)
+### 4. TLB 슛다운(TLB shootdown)이란 무엇인가? 그것이 왜 (또는 언제) 필요한지 설명하시오. (P 24-25 First)
 ✅ TLB Shootdown이란?  
 ~~~
 멀티코어 환경에서 주소 매핑 일관성을 유지하기 위한
@@ -51,8 +57,11 @@ Page Table이 변경되면 TLB에 캐시된 내용과 불일치 문제가 발생
 따라서, 일관성을 유지하기 위해 필요함
 ~~~
 
-## 심층 문제
+### 5. Copy-on-Write는 무엇인가? 사용했을 때의 이점은 무엇인가?
+~~~
+~~~
 
+## Address Translation 심층 문제
 ### 1. Consider a logical address space of eight pages of 1024 words each, mapped onto a physical memory of 32 frames. How many bits are there in the logical address and the physical address? (P 24-25 Second)
 ~~~
 각각 1024 바이트 (2^10) 크기의 Page
@@ -99,22 +108,8 @@ PFN 상위 6 bits와 Offset 12 bits를 합친 것이 Physical Address가 됨
 
 -----
 
-### 3. Consider a virtual memory system with paging. Assume there is no cache. A memory access is done by a page table lookup followed by an access to the target physical memory address. Now the system provides hardware support with translation look-aside buffers (TLBs) to accelerate the page table lookup time upon a TLB hit. Assume that it takes 20 nanoseconds to search the TLBs, and 100 nanoseconds to access from the main memory. (P 22-23 Second)
 
-### 3.1. With 80% hit ratio of TLBs, calculate the average memory access time.  
-
-AMAT = `TLB hit ratio x (TLB search time + Memory access time)` + `TLB miss ratio x (TLB search time + 2 x Memory access time)`
-~~~
-AMAT = 0.8 x (20 + 100) + 0.2 x (20 + 200) = 0.8 x 120 + 0.2 x 220 = 96 + 44 = 140 ns
-~~~
-### 3.2. With 98% hit ratio of TLBs, calculate the average memory access time.  
-~~~
-AMAT = 0.98 x (20 + 100) + 0.02 x (20 + 200) = 0.98 x 120 + 0.02 x 220 = 122 ns
-~~~
-
------
-
-### 4. For a processor with 64-bit virtual addresses, a single-level page table, a 34-bit physical address space, and 64KB pages, show a diagram depicting how a virtual address is translated into a physical address. Make sure to label each field and path with a name and the number of bits, and include the TLB and page table in your diagram (Assume no page faults). (P 22-23 First)
+### 3. For a processor with 64-bit virtual addresses, a single-level page table, a 34-bit physical address space, and 64KB pages, show a diagram depicting how a virtual address is translated into a physical address. Make sure to label each field and path with a name and the number of bits, and include the TLB and page table in your diagram (Assume no page faults). (P 22-23 First)
 1️⃣ Step 1. Virtual Address, Physical Address 필드 해석
 ~~~
 Virtual Address 해석:
@@ -146,3 +141,114 @@ Page Table에 접근하여 Physical Frame Number을 얻고자 함
 
 ✅ 다이어그램  
 ![page_table_and_tlb](../image_files/page_table_and_tlb.png)
+
+## Performance 심층 문제
+
+### 3. Consider a virtual memory system with paging. Assume there is no cache. A memory access is done by a page table lookup followed by an access to the target physical memory address. Now the system provides hardware support with translation look-aside buffers (TLBs) to accelerate the page table lookup time upon a TLB hit. Assume that it takes 20 nanoseconds to search the TLBs, and 100 nanoseconds to access from the main memory. (P 22-23 Second)
+
+### 3.1. With 80% hit ratio of TLBs, calculate the average memory access time.  
+
+AMAT = `TLB hit ratio x (TLB search time + Memory access time)` + `TLB miss ratio x (TLB search time + 2 x Memory access time)`
+~~~
+AMAT = 0.8 x (20 + 100) + 0.2 x (20 + 200) = 0.8 x 120 + 0.2 x 220 = 96 + 44 = 140 ns
+~~~
+### 3.2. With 98% hit ratio of TLBs, calculate the average memory access time.  
+~~~
+AMAT = 0.98 x (20 + 100) + 0.02 x (20 + 200) = 0.98 x 120 + 0.02 x 220 = 122 ns
+~~~
+
+## Page Replacement 심층 문제
+
+### 1. Assume that there are five frames, and all frames are initially empty. For each of the following page replacement algorithms, how many page faults would occur? Consider the following page reference string: (P 22-23 Second)
+~~~
+1,2,3,4,2,1,5,6,2,1,2,3,7,6,3,6
+~~~
+
+#### 1.1. LRU replacement algorithm
+
+#### 1.2. Optimal replacement algorithm
+
+
+-----
+
+### 2. How many page faults would occur for the following replacement algorithms, assuming one, four, or seven frames? Remember all frames are initially empty, so your first unique pages will all cost one fault each. Consider the following page reference string: (P 22-23 First)
+~~~
+1,2,3,4,2,1,5,6,2,1,2,3,7,6,3,2
+~~~
+
+#### 2.1. LRU replacement
+
+**Assuming four frames:**  
+| 순서  | 사용 Page | 교체 대상 | Frame 상태    | Page Fault 발생 여부 |
+|-------|-----------|-----------|-------------|---------------------|
+| 1     | 1         |           | 1           | O                   |
+| 2     | 2         |           | 1,2         | O                   |
+| 3     | 3         |           | 1,2,3       | O                   |
+| 4     | 4         |           | 1,2,3,4     | O                   |
+| 5     | 2         |           | 1,2,3,4     | X                   |
+| 6     | 1         |           | 1,2,3,4     | X                   |
+| 7     | 5         | 3         | 1,2,5,4     | O                   |
+| 8     | 6         | 4         | 1,2,5,6     | O                   |
+| 9     | 2         |           | 1,2,5,6     | X                   |
+| 10    | 1         |           | 1,2,5,6     | X                   |
+| 11    | 2         |           | 1,2,5,6     | X                   |
+| 12    | 3         | 5         | 1,2,3,6     | O                   |
+| 13    | 7         | 6         | 1,2,3,7     | O                   |
+| 14    | 6         | 1         | 6,2,3,7     | O                   |
+| 15    | 3         |           | 6,2,3,7     | X                   |
+| 16    | 2         |           | 6,2,3,7     | X                   |
+
+🎯 Page Fault `9번` 발생
+
+#### 2.2. FIFO replacement
+
+**Assuming four frames:**  
+| 순서  | 사용 Page | 교체 대상 | Frame 상태    | Page Fault 발생 여부 |
+|-------|-----------|-----------|-------------|---------------------|
+| 1     | 1         |           | 1           | O                   |
+| 2     | 2         |           | 1,2         | O                   |
+| 3     | 3         |           | 1,2,3       | O                   |
+| 4     | 4         |           | 1,2,3,4     | O                   |
+| 5     | 2         |           | 1,2,3,4     | X                   |
+| 6     | 1         |           | 1,2,3,4     | X                   |
+| 7     | 5         | 1         | 5,2,3,4     | O                   |
+| 8     | 6         | 2         | 5,6,3,4     | O                   |
+| 9     | 2         | 3         | 5,6,2,4     | O                   |
+| 10    | 1         | 4         | 5,6,2,1     | O                   |
+| 11    | 2         |           | 5,6,2,1     | X                   |
+| 12    | 3         | 5         | 3,6,2,1     | X                   |
+| 13    | 7         | 6         | 3,7,2,1     | O                   |
+| 14    | 6         | 2         | 3,7,6,1     | O                   |
+| 15    | 3         |           | 3,7,6,1     | X                   |
+| 16    | 2         | 1         | 3,7,6,2     | O                   |
+
+🎯 Page Fault `11번` 발생
+
+#### 2.3. Optimal replacement
+
+**Assuming four frames:**  
+| 순서  | 사용 Page | 교체 대상 | Frame 상태    | Page Fault 발생 여부 |
+|-------|-----------|-----------|-------------|---------------------|
+| 1     | 1         |           | 1           | O                   |
+| 2     | 2         |           | 1,2         | O                   |
+| 3     | 3         |           | 1,2,3       | O                   |
+| 4     | 4         |           | 1,2,3,4     | O                   |
+| 5     | 2         |           | 1,2,3,4     | X                   |
+| 6     | 1         |           | 1,2,3,4     | X                   |
+| 7     | 5         | 4         | 1,2,3,5     | O                   |
+| 8     | 6         | 5         | 1,2,3,6     | O                   |
+| 9     | 2         |           | 1,2,3,6     | X                   |
+| 10    | 1         |           | 1,2,3,6     | X                   |
+| 11    | 2         |           | 1,2,3,6     | X                   |
+| 12    | 3         |           | 1,2,3,6     | X                   |
+| 13    | 7         | 1         | 7,2,3,6     | O                   |
+| 14    | 6         |           | 7,2,3,6     | X                   |
+| 15    | 3         |           | 7,2,3,6     | X                   |
+| 16    | 2         |           | 7,2,3,6     | X                   |
+
+🎯 Page Fault `7번` 발생
+
+-----
+
+### 3. How does DMA (Direct Memory Access) increase system concurrency? How does it complicate hardware design? (P 22-23 First)
+

@@ -1,12 +1,8 @@
 # 면접 기출 예시
 ## 개념 질문
-### 1. Demand paging이란 무엇인가? (P 23-24 First)
-~~~
-프로그램이 실제로 필요로 할 때(요구할 때)에만 해당 페이지를 메모리에 불러오는 방식
-즉, 프로그램의 전체 페이지를 한꺼번에 메모리에 올리지 않고, 실제로 접근하는 페이지만 로딩하는 것
-~~~
 
-### 2. Multi-level Page Table은 어떻게 저장 공간 낭비를 줄이는가? (P 23-24 First)
+
+### 1. Multi-level Page Table은 어떻게 저장 공간 낭비를 줄이는가? (P 23-24 First)
 메모리 효율 관점:
 ~~~
 단일 페이지 테이블(Single-level Page Table)의 문제점:
@@ -21,7 +17,7 @@ Multi-level 페이지 테이블의 효과:
 실제로 참조된 주소 영역만 테이블이 생성되기 때문에,
 페이지 테이블이 디스크에 저장된다고 해도 불필요한 부분까지 디스크 공간을 사용하지 않음
 ~~~
-### 3. Multi-level Page Table을 사용할 때 Address Translation 성능 관점에서의 주요 단점(key drawback)은 무엇인가? (23-24 First)
+### 2. Multi-level Page Table을 사용할 때 Address Translation 성능 관점에서의 주요 단점(key drawback)은 무엇인가? (23-24 First)
 ~~~
 주소 변환 시, 여러 단계의 테이블을 순차적으로 접근해야 하므로 변환 속도가 느려짐
 Page Table 접근으로 인한 성능 저하를 완화하기 위해 TLB 캐시를 사용함
@@ -31,27 +27,4 @@ Page Table 접근으로 인한 성능 저하를 완화하기 위해 TLB 캐시�
 ~~~
 
 ## 심층 문제
-
-### 1. Assume that there are five frames, and all frames are initially empty. For each of the following page replacement algorithms, how many page faults would occur? Consider the following page reference string: (P 22-23 Second)
-~~~
-1,2,3,4,2,1,5,6,2,1,2,3,7,6,3,6
-~~~
-
-#### 1.1. LRU replacement algorithm
-
-#### 1.2. Optimal replacement algorithm
-
-
-### 2. How many page faults would occur for the following replacement algorithms, assuming one, four, or seven frames? Remember all frames are initially empty, so your first unique pages will all cost one fault each. Consider the following page reference string: (P 22-23 First)
-~~~
-1,2,3,4,2,1,5,6,2,1,2,3,7,6,3,2
-~~~
-
-#### 2.1. LRU replacement
-
-#### 2.2. FIFO replacement
-
-#### 2.3. Optimal replacement
-
-### 3. How does DMA (Direct Memory Access) increase system concurrency? How does it complicate hardware design? (P 22-23 First)
 

@@ -80,6 +80,8 @@
 * 읽기만 할 땐 부모와 자식이 같은 메모리 참조
 * **쓰기 시점에만 실제 메모리 분리**
 
+-----
+
 ### 2. A context switching may occur between threads or between processes. In the following table, indicate whether each action occurs or not upon switching between threads and switching between processes, respectively. Mark O to indicate an action occurs; mark X to indicate an action does not occur. (P 22-23 Second)
 
 | Action                | Switching threads | Switching process | 설명 |
