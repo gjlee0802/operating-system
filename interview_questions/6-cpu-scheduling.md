@@ -55,7 +55,7 @@
 결국엔 높은 우선순위 프로세스들 사이에 끼어들 수 있음
 ~~~
 
-## Scheduling 관련 심층 문제
+## 💪 Scheduling 관련 심층 문제
 
 ### 1. Consider three processes P1, P2, and P3 with the following arrival times, execution (burst) times, and priorities (where 1 is the highest). Assuming no context switching overhead,explain each execution sequence with (a) priority scheduling and (b) round-robin scheduling. (P 23-24 First)
 
