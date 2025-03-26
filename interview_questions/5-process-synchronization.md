@@ -2,8 +2,19 @@
 
 ## 개념 질문
 
-### 1. It is critical for concurrent threads to synchronize accesses to shared objects. Why?
+### 1. 동시 실행되는 스레드들이 공유 객체에 접근할 때 동기화를 하는 것은 왜 중요한가요?
 ~~~
+🎯 "경쟁 상태(Race Condition)"를 방지하고 데이터 무결성(Data Integrity) 보장을 위해 동기화 하는 것이 중요함
+~~~
+
+✅ **경쟁 상태(Race Condition)**  
+~~~
+두 개 이상의 쓰레드가 공유 객체를 동시에 읽고 쓰는 경우, 실행 순서에 따라 결과가 달라질 수 있음
+~~~
+
+✅ **데이터 무결성(Data Integrity)**  
+~~~
+동기화를 하지 않으면, 중간 단계의 변경된 값이 다른 쓰레드에게 노출될 수 있음
 ~~~
 
 ## 심층 문제

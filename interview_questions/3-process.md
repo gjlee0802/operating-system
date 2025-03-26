@@ -19,9 +19,21 @@
 쓰레드는 Code, Data, Heap 영역을 공유하며, Stack은 쓰레드마다 개별적으로 따로 존재
 ~~~
 
-### 2. Provide at least one advantage of using threads over processes. (P 24-25 First)
+### 2. Thread를 사용하는 것이 Process보다 가지는 장점 중 하나를 제시하시오. (P 24-25 First)
+~~~
+🎯 스레드는 같은 프로세스 내에서 메모리 공간(코드, 데이터, 파일 등)을 공유하기 때문에,
+스레드 간 통신이 매우 빠르고 효율적임
 
-### 3. Provide at least one advantage of using processes over threads. (P 24-25 First)
+→ 예를 들어, 스레드끼리는 별도의 IPC(프로세스 간 통신) 없이 공유 변수를 통해 데이터를 주고받을 수 있음
+~~~
+
+### 3. Process를 사용하는 것이 Thread보다 가지는 장점 중 하나를 제시하시오. (P 24-25 First)
+~~~
+🎯 프로세스는 서로 독립된 메모리 공간을 사용하기 때문에,
+하나의 프로세스에 문제가 생겨도 다른 프로세스에 영향을 주지 않음
+
+→ 즉, 안정성과 오류 격리 측면에서 유리합니다.
+~~~
 
 ## 심층 문제
 
