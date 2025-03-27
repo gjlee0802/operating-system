@@ -58,7 +58,36 @@ Page Table이 변경되면 TLB에 캐시된 내용과 불일치 문제가 발생
 ~~~
 
 ### 5. Copy-on-Write는 무엇인가? 사용했을 때의 이점은 무엇인가?
+✅ CoW란?
 ~~~
+Write할때 Copy하자는 의미로써 
+어떤 한 프로세스가 공유 페이지를 작성할때만 해당 공유페이지를 복사하는 방법
+~~~
+✅ 이점
+~~~
+fork 했을 때 바로 복사하는 것보다 쓰기가 발생할 때만 복사하여 오버헤드가 줄어듦
+~~~
+
+### 6. DMA (Direct Memory Access)가 어떻게 시스템의 동시성을 높이는가? 어떻게 하드웨어의 복잡성을 높이는가? (P 22-23 First)
+✅ DMA가 시스템의 동시성(System Concurrency)을 향상시키는 이유  
+~~~
+DMA는 CPU의 개입 없이 메모리와 데이터를 주고받을 수 있게 하는 방식
+
+DMA를 사용하면,
+→ CPU는 I/O 작업을 DMA에게 맡기고
+→ 자신은 다른 작업(계산 등)을 계속 수행할 수 있음
+~~~
+
+✅ DMA가 하드웨어 설계를 복잡하게 만드는 이유  
+~~~
+a. 버스 충돌 관리
+CPU와 DMA가 동시에 메모리에 접근할 경우 버스 충돌이 일어나는 것을 방지하기 위한 제어 필요
+
+b. 메모리 일관성 문제
+DMA가 메모리를 직접 수정하면 CPU 캐시와 메모리 사이에 일관성 오류가 발생하는 것을 방지하기 위한 제어 필요
+
+c. 인터럽트 및 우선순위 처리
+DMA 완료 시 인터럽트를 통해 CPU에게 알리기 위한 인터럽트 제어 필요
 ~~~
 
 ## 💪 Address Translation 관련 심층 문제
@@ -107,7 +136,6 @@ PFN 상위 6 bits와 Offset 12 bits를 합친 것이 Physical Address가 됨
 ~~~
 
 -----
-
 
 ### 3. For a processor with 64-bit virtual addresses, a single-level page table, a 34-bit physical address space, and 64KB pages, show a diagram depicting how a virtual address is translated into a physical address. Make sure to label each field and path with a name and the number of bits, and include the TLB and page table in your diagram (Assume no page faults). (P 22-23 First)
 1️⃣ Step 1. Virtual Address, Physical Address 필드 해석
@@ -287,8 +315,3 @@ AMAT = 0.98 x (20 + 100) + 0.02 x (20 + 200) = 0.98 x 120 + 0.02 x 220 = 122 ns
 | 16    | 2         |           | 7,2,3,6     | X                   |
 
 🎯 Page Fault `7번` 발생  
-
------
-
-### 3. How does DMA (Direct Memory Access) increase system concurrency? How does it complicate hardware design? (P 22-23 First)
-
