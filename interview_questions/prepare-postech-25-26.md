@@ -2,16 +2,49 @@
 ## Chapter 3. Process
 ### Q: Process와 Thread의 주요 차이를 설명하시오. 
 ~~~
-FILL HERE
+1. 생성/전환 비용:
+프로세스는 생성/전환 비용이 큼
+쓰레드는 생성/전환 비용이 작음
+
+2. 메모리 영역의 독립성:
+프로세스는 자신만의 독립된 메모리 공간을 가져 완전히 분리되어 있음
+쓰레드는 Code, Data, Heap 영역을 공유하며, Stack은 쓰레드마다 개별적으로 따로 존재함
 ~~~
 
 ## Chapter 7. Deadlocks
 ### Q: Deadlock가 발생하기 위한 4가지 필요 조건들을 제시하시오. 각 조건을 정확히 설명하시오.
 ~~~
-FILL HERE
+1. 상호 배제 (Mutual Exclusion) 조건:
+    자원은 한 번에 하나의 프로세스만 사용할 수 있어야 함
+
+2. 점유와 대기 (Hold and Wait) 조건:
+    프로세스가 어떤 자원을 점유한 상태에서 다른 자원을 요청하며 대기하여야 함
+
+3. 비선점(Non Preemptation) 조건
+    할당된 자원을 강제로 뺏을 수 없으며,
+    프로세스가 자원을 반납해야 함
+
+4. 순환 대기 (Circular Wait) 조건
+    서로의 자원을 기다리며 원형으로 대기하는 상황이어야 함
 ~~~
 
 # 등장하지 않았지만 중요한 개념
+
+## Chapter 5. Process Synchronization
+
+### Q: 프로세스의 컨텍스트(context)란 무엇이며, 컨텍스트 스위칭(context switching)에서 수행되는 주요 단계들은 무엇인가?
+~~~
+~~~
+
+### Q: Dispatcher란 무엇인가?
+~~~
+
+~~~
+
+### Q: Critical Section이란 무엇인가?
+~~~
+
+~~~
 
 ## Chapter 7. Deadlocks
 Deadlock Avoidance - 뱅커 알고리즘 문제  
