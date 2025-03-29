@@ -33,17 +33,37 @@
 ## Chapter 5. Process Synchronization
 
 ### Q: 프로세스의 컨텍스트(context)란 무엇이며, 컨텍스트 스위칭(context switching)에서 수행되는 주요 단계들은 무엇인가?
+✅ Context란?  
 ~~~
+context는 프로세스가 실행되던 상태의 정보들을 의미하며,
+잠시 중단되었을 때, 실행 상태를 복구하여 이어서 실행이 가능하도록 함
+
+포함되는 정보:
+실행될 때의 프로세서 레지스터 값들, 프로세스 상태, 메모리 정보(Page Table), CPU 정보(우선순위, 스케줄링 정보)
+~~~
+
+✅ Context Switching 과정:  
+~~~
+1. 현재 프로세스의 context를 PCB에 저장
+2. 다음에 실행할 프로세스의 context를 PCB에서 읽어서 복원
+3. 메모리 세팅: 프로세스에 필요한 Page나 Segment를 메모리에 준비
+4. CPU 제어 전환: PC를 새 프로세스 위치로 이동하여 실행
 ~~~
 
 ### Q: Dispatcher란 무엇인가?
 ~~~
+Dispatcher는 Context Switching을 담당하는 OS 구성요소
 
+아래의 기능들을 수행함
+1. 문맥 교환 (Context Switch)
+2. 사용자 모드로 전환: Kernel 모드 → User 모드로 전환
+3. 프로세스의 프로그램 카운터(PC)를 적절히 설정: 새 프로세스가 실행을 이어가도록 함
 ~~~
 
 ### Q: Critical Section이란 무엇인가?
 ~~~
-
+둘 이상의 쓰레드가 접근해서는 안되는 공유 자원에 접근하는
+코드의 일부 영역을 가리킴
 ~~~
 
 ## Chapter 7. Deadlocks
