@@ -13,6 +13,8 @@
 ### Chapter 9. Virtual Memory
 
 ## 부가 자료
+* [Geeks for Geeks: GATE 대비 자료 1](https://www.geeksforgeeks.org/operating-system-for-gate/)
+* [Geeks for Geeks: GATE 대비 자료 2](https://www.geeksforgeeks.org/operating-systems-gate-questions/)
 * [대학원 면접 대비: Process](./interview_questions/3-process.md)
 * [대학원 면접 대비: Process Synchronization](./interview_questions/5-process-synchronization.md)
 * [대학원 면접 대비: Scheduling](./interview_questions/6-cpu-scheduling.md)
