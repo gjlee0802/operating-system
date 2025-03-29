@@ -110,7 +110,7 @@ Physical Frame Number로 5 bits 사용
 
 ### 2. A certain computer provides its users with a virtual-memory space of 2^32 bytes. The computer has 2^18 bytes of physical memory. The virtual memory is implemented by paging, and the page size is 4096 bytes (where 4096 = 2^12). A user process generates the virtual address 11123456 (that is, 0001 0001 0001 0010 0011 0100 0101 0110 in binary format). Explain how the system computes the corresponding physical location. (P 23-24 Second)
 
-1️⃣ Step 1. Virtual Address, Physical Address 필드 해석
+1️⃣ Step 1. Virtual Address, Physical Address 필드 해석  
 ~~~
 Page 하나의 크기는 2^12 bytes 이므로, 12 bits는 Page Offset으로 사용된다.
 따라서, 주어진 Virtual Address의 456 ("0100 0101 0110") 부분이 Page Offset이다.
@@ -121,13 +121,13 @@ Physical Memory의 크기는 2^18 bytes이므로, Physical Address는 총 18 bit
 나머지 6 bits는 Physical Frame Number로 사용된다.
 ~~~
 
-2️⃣ Step 2. Page Table: Virtual Page Number → Physical Frame Number
+2️⃣ Step 2. Page Table: Virtual Page Number → Physical Frame Number  
 ~~~
 이 부분은 시스템에 저장된 Page Table에 따라 달라짐
 → 즉, 실제 VPN 0x11123이 어떤 Physical Frame Number(PFN)에 매핑되는지는 Page Table이 필요함
 ~~~
 
-3️⃣ Step 3. PFN을 찾은 이후, 변환된 Physical Address
+3️⃣ Step 3. PFN을 찾은 이후, 변환된 Physical Address  
 ~~~
 Page Table에서 VPN에 해당하는 PFN이 0x15("00010101")라고 가정한다면,
 
@@ -138,7 +138,7 @@ PFN 상위 6 bits와 Offset 12 bits를 합친 것이 Physical Address가 됨
 -----
 
 ### 3. For a processor with 64-bit virtual addresses, a single-level page table, a 34-bit physical address space, and 64KB pages, show a diagram depicting how a virtual address is translated into a physical address. Make sure to label each field and path with a name and the number of bits, and include the TLB and page table in your diagram (Assume no page faults). (P 22-23 First)
-1️⃣ Step 1. Virtual Address, Physical Address 필드 해석
+1️⃣ Step 1. Virtual Address, Physical Address 필드 해석  
 ~~~
 Virtual Address 해석:
 Page 하나의 크기가 64KB = 2^16 bytes이므로, 
@@ -152,7 +152,7 @@ Offset 크기는 VA의 Page Offset의 크기와 같으므로,
 Physical Address(34 bits)에서 Frame Offset(16 bits)를 제외한
     Physical Frame Number는 18 bits
 ~~~
-2️⃣ Step 2. TLB (hit일 경우): Virtual Page Number → Physical Frame Number
+2️⃣ Step 2. TLB (hit일 경우): Virtual Page Number → Physical Frame Number  
 ~~~
 TLB를 탐색하여 대상 VPN(48 bits)이 등록되어 있으면,
 48비트 VPN을 받아 18 bits PFN을 반환함
@@ -161,7 +161,7 @@ TLB를 탐색하여 대상 VPN(48 bits)이 등록되어 있으면,
 이제 완성된 Physical Address로 물리 메모리의 데이터에 접근 가능
 ~~~
 
-2️⃣ Step 3. TLB (miss일 경우): Page Table 접근
+2️⃣ Step 3. TLB (miss일 경우): Page Table 접근  
 ~~~
 TLB를 탐색하여 대상 VPN이 등록되지 않았다면,
 Page Table에 접근하여 Physical Frame Number을 얻고자 함
@@ -169,6 +169,92 @@ Page Table에 접근하여 Physical Frame Number을 얻고자 함
 
 ✅ 다이어그램  
 ![page_table_and_tlb](../image_files/page_table_and_tlb.png)
+
+-----
+
+### 4. Assume a simple paging system with 232 bytes of physical memory, 248 bytes of logical address space and pages that are 220 bytes in size. Further assume that each page table entry contains 4 bits indicating protection and validity of the entry. (Cambridge 21 Second)
+
+정리하면,
+* Physical Memory 크기
+    * 2^32 바이트 (4GB)
+* Virtual Address Space 크기
+    * 2^48 바이트 (256TB)
+* Page 크기
+    * 2^20 바이트 (1MB)
+* PTE당 추가 정보
+    * 4 비트
+
+#### 4.1. How many bits are used for the frame number and how many for the frame offset?
+~~~
+Page 하나의 크기는 2^20 바이트 이므로, Page Offset는 20 비트
+Frame Offset은 Page Offset과 동일하게 20 비트 사용
+
+Physical Address를 위해 32 비트 사용
+Frame Number는 32 비트에서 20 비트(Frame Offset 필드)를 제외한 12 비트
+~~~
+
+#### 4.2. What is the total size of the page table in number of bits?
+
+1️⃣ Step 1. Page의 개수 구하기  
+~~~
+Virtual Address Space의 크기를 Page 하나의 크기로 나누면, Page 개수를 구할 수 있음
+
+Page 개수 = 2^48 / 2^20 = 2^28 개
+~~~
+
+2️⃣ Step 2. Page Table Entry 크기 구하기  
+~~~
+PTE는 Frame Number와 4 비트로 구성되었으므로,
+
+PTE 크기 = Frame Number 크기 + 4 bits
+    = 12 + 4 = 16 bits
+~~~
+
+3️⃣ Step 3. Page Table 크기 구하기  
+~~~
+🎯 Page Table 크기 = Page 개수 x PTE 크기
+    = 2^28 x 2^4  = 2^32 bits (512MB)
+~~~
+
+#### 4.3. Assume that the working set of a typical process is fixed throughout the process lifetime and consists of 20 pages. How many entries would you suggest for the Translation Lookaside Buffer (TLB) for this system? What would its total size be in number of bits? Explain your answer.
+
+1️⃣ Step 1. TLB에 몇 개의 엔트리를 넣을 것인가?  
+~~~
+working set이 20 페이지로 구성되므로,
+TLB에서 20개의 페이지를 수용할 수 있다면, Miss가 발생하지 않게 최적화 가능함
+
+🎯 따라서, TLB에 20개의 엔트리를 넣을 것임
+~~~
+
+2️⃣ Step 2. TLB 크기 구하기  
+~~~
+TLB 엔트리 하나의 크기 = Frame Number 크기 + Page Number 크기 + 추가 비트
+PFN 크기: 12 bits
+VPN 크기: 28 bits
+추가 비트 크기: 4 bits
+
+TLB Entry 크기 = 12 + 28 + 4 = 44 bits
+
+TLB 크기 = TLB Entry 크기 x 20 = 44 x 20 = 880 bits
+
+🎯 따라서, TLB 크기는 880 bits
+~~~
+
+#### 4.4. Further assume that TLB search time is 20ns, TLB hit ratio is 80% and memory access time is 100ns. How many page table levels would you need to achieve an effective access time of 160ns, and why?
+~~~
+TLB hit ratio: 0.8
+TLB miss ratio: 0.2
+
+160 ns = TLB hit ratio x (20 + Memory Access Time) + TLB Miss ratio x (20 + Memory Access Time x # of Levels + Memory Access Time)
+
+160 ns = 0.8 x 120 + 0.2 x (120 + 100 x '# of Levels')
+    = 96 + 24 + 20 x '# of levels'
+    = 120 + 20 x '# of levels'
+
+# of levels = 2
+
+🎯 따라서, 2단계의 Page Table Levels가 필요함
+~~~
 
 ## 💪 Performance 관련 심층 문제
 
