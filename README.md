@@ -11,6 +11,7 @@
 ### Chapter 7. Deadlocks
 ### Chapter 8. Memory Management Strategies
 ### Chapter 9. Virtual Memory
+### Chapter 10. File System
 
 ## 부가 자료
 * [Geeks for Geeks: GATE 대비 자료 1](https://www.geeksforgeeks.org/operating-system-for-gate/)
@@ -21,3 +22,4 @@
 * [대학원 면접 대비: Deadlocks](./interview_questions/7-deadlocks.md)
 * [대학원 면접 대비: Memory Management Strategies](./interview_questions/8-memory-management-strategies.md)
 * [대학원 면접 대비: Virtual Memory](./interview_questions/9-virtual-memory.md)
+* [대학원 면접 대비: File System](./interview_questions/10-file-system.md)
