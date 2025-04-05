@@ -17,7 +17,7 @@ Multi-level 페이지 테이블의 효과:
 페이지 테이블이 디스크에 저장된다고 해도 불필요한 부분까지 디스크 공간을 사용하지 않음
 ~~~
 
-### 2. Multi-level Page Table을 사용할 때 Address Translation 성능 관점에서의 주요 단점(key drawback)은 무엇인가? (23-24 First)
+### 2. Multi-level Page Table을 사용할 때 Address Translation 성능 관점에서의 주요 단점(key drawback)은 무엇인가? (P 23-24 First)
 ~~~
 주소 변환 시, 여러 단계의 테이블을 순차적으로 접근해야 하므로 변환 속도가 느려짐
 Page Table 접근으로 인한 성능 저하를 완화하기 위해 TLB 캐시를 사용함
